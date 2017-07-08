@@ -1,3 +1,15 @@
+// function to direct the user from the home screen page to the song play page
+$('.welcome-screen button').on('click', function() {
+    var name = $('#name-input').val();
+    var message = "Welcome, " + name;
+    $('.main .user-name').text(message);
+    $('.welcome-screen').addClass('hidden');
+    $('.main').removeClass('hidden');
+});
+
+
+
+/*
 // function to add song
 $('#submit_song').click(function(){
     var song_name = $('#song_to_upload').val().replace(/C:\\fakepath\\/i, '');
@@ -46,3 +58,4 @@ $('body').on('keypress',function(event){
                 }
         }
 });
+*/
