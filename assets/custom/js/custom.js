@@ -1,4 +1,4 @@
-// function to direct the user from the home screen page to the song play page
+// function to direct the user from the home screen section to the song playlist section
 $('.welcome-screen button').on('click', function() {
     var name = $('#name-input').val();
     var message = "Welcome, " + name;
