@@ -49,6 +49,7 @@ button{
 /* welcome section styles ends*/
 
 /* playlist section styles starts*/
+/*header*/
 .hidden {
     display: none;
 }
@@ -64,10 +65,42 @@ button{
     padding: 1rem;
     color: #FFF;
 }
+audio{
+    opacity: 0.3;
+}
+/*content*/
 .content {
     flex:1;
     background-color: #1f1f1f;
 }
+.add-gif{
+    background-image: url(../../images/source.gif);
+    background-size: cover;
+    background-position: bottom;
+}
+.table-responsive{
+    margin-top: 15px;
+    color: aliceblue;
+    font-weight: bolder;
+}
+tr:hover{
+    color: black;
+    background-color: aqua;
+}
+tr.song-list-header{
+    color: white;
+    background-color: black;
+    opacity: 0.7;
+}
+.active{
+    background-color: white;
+    color: black;
+    opacity: 0.7;
+}
+.song{
+    cursor: pointer;
+}
+/*footer*/
 .footer {
     height: 80px;
     background-color:#282828;
@@ -84,16 +117,24 @@ button{
 #play-icon {
     color: teal;
 }
-.add-gif{
-    background-image: url(../../images/source.gif);
-    background-size: cover;
-    background-position: bottom;
-}
-audio{
-    opacity: 0.3;
-}
 .song-play-pannel{
     text-align: center;
 }
+.progress-wrapper {
+    text-align: center;
+}
+.time-elapsed{
+    text-align: right;
+}
+.song-duration{
+    text-align: left;
+}
+.progress-wrapper div.col-sm-3 {
+    color: #959595;
+}
+#song-progress-bar{
+    height: 8px;
+    width: 100%;
+    background-color: #3d3d3d;
+}
 /* playlist section styles ends*/
-

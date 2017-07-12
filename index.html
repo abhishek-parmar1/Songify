@@ -43,19 +43,75 @@
                 <p class="pull-right user-name"></p>
             </div>
             <div class="col-sm-12 song-play-pannel">
-                <audio src="songs/song.mp3" controls="" class="song-play"></audio>
+                <audio src="" controls="" class="song-play" id="player"></audio>
             </div>
         </div>
         <!-- user name section ends-->
         <!-- song playlist section starts-->
         <div class="row content" >
-            
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10 table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                      <tr class="song-list-header">
+                        <th>Title</th>
+                        <th>Artist</th>
+                        <th>Album</th>
+                        <th>Duration</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="song" id="song1">
+                        <td class="name"></td>
+                        <td class="artist"></td>
+                        <td class="album"></td>
+                        <td class="duration"></td>
+                      </tr>
+                      <tr class="song" id="song2">
+                        <td class="name"></td>
+                        <td class="artist"></td>
+                        <td class="album"></td>
+                        <td class="duration"></td>
+                      </tr>
+                      <tr class="song" id="song3">
+                        <td class="name"></td>
+                        <td class="artist"></td>
+                        <td class="album"></td>
+                        <td class="duration"></td>
+                      </tr>
+                      <tr class="song" id="song4">
+                        <td class="name"></td>
+                        <td class="artist"></td>
+                        <td class="album"></td>
+                        <td class="duration"></td>
+                      </tr>
+                      <tr class="song" id="song5">
+                        <td class="name"></td>
+                        <td class="artist"></td>
+                        <td class="album"></td>
+                        <td class="duration"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+            <div class="col-sm-1"></div>
         </div>
         <!-- song playlist section ends-->
         <!-- song controls section starts-->
         <div class="row footer" >
             <div class="col-sm-12 controls">
                 <i class="fa fa-play clickable " id="play-icon" aria-hidden="true"></i>
+            </div>
+            <div class="progress-wrapper col-sm-12">
+                <div class="row">
+                    <div class="col-sm-3 time-elapsed">
+                    </div>
+                    <div class="col-sm-6 player-progress">
+                        <progress id="song-progress-bar" value="0" max="1"></progress>
+                    </div>
+                    <div class="col-sm-3 song-duration">
+                    </div>
+                </div>
             </div>
         </div>
         <!-- song control section ends-->
