@@ -65,12 +65,9 @@ button{
     padding: 1rem;
     color: #FFF;
 }
-audio{
-    opacity: 0.3;
-}
 /*content*/
 .content {
-    flex:1;
+    height: 100%;
     background-color: #1f1f1f;
 }
 .add-gif{
@@ -100,6 +97,42 @@ tr.song-list-header{
 .song{
     cursor: pointer;
 }
+input[aria-controls="song-playlist"]{
+    color: black;
+    margin-left: 10px;
+}
+/* song details section */
+.song-details-section{
+    height: 260px;
+    background-color:#1f1f1f;
+    color: white;
+}
+.current-song-image{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    border-left: 2px solid black;
+}
+#current-song-image{
+    border: 2px solid white;
+}
+.song-details,
+.current-song-image{
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+}
+.song-details{
+    border-right: 2px solid black;
+}
+div.col-md-12.current-song-name,
+div.col-md-12.current-song-artist,
+.song-play-pannel{
+    text-align: center;
+    margin-top: 23px;
+}
+
 /*footer*/
 .footer {
     height: 80px;
@@ -114,11 +147,13 @@ tr.song-list-header{
 .clickable {
     cursor: pointer;
 }
-#play-icon {
+#play-icon,
+#random-play,
+#backwrad-play,
+#forward-play,
+#repeat-play{
     color: teal;
-}
-.song-play-pannel{
-    text-align: center;
+    margin-left: 50px;
 }
 .progress-wrapper {
     text-align: center;
