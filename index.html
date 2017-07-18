@@ -32,7 +32,7 @@
                 <input type="text" placeholder="Name" id="name-input">
             </div>
             <div class="col-sm-3 pull-left welcome-input">
-                <button> Go </button>
+                <button ><strong>Go</strong>  </button>
             </div>
         </div>
     </div>
@@ -41,7 +41,10 @@
     <div class="container main hidden">
         <!-- user name section starts-->
         <div class="row display-user-name">
-            <div class="col-sm-12 ">
+            <div class="col-sm-6 ">
+                <button id="virtual-keyboard-btn" >Activate Virtual Keyboard Mode</button>
+            </div>
+            <div class="col-sm-6 ">
                 <p class="pull-right user-name"></p>
             </div>
         </div>
@@ -122,9 +125,9 @@
         <div class="row footer" >
             <div class="col-sm-12 controls">
                 <i class="fa fa-random clickable disabled" id="random-play" aria-hidden="true"></i>
-                <i class="fa fa-step-backward clickable disabled" id="backwrad-play" aria-hidden="true"></i>
+                <i class="fa fa-step-backward clickable" id="backwrad-play" aria-hidden="true"></i>
                 <i class="fa fa-play clickable " id="play-icon" aria-hidden="true"></i>
-                <i class="fa fa-step-forward clickable disabled" id="forward-play" aria-hidden="true"></i>
+                <i class="fa fa-step-forward clickable" id="forward-play" aria-hidden="true"></i>
                 <i class="fa fa-repeat disabled clickable" id="repeat-play" aria-hidden="true"></i>
             </div>
             <div class="progress-wrapper col-sm-12">
@@ -142,12 +145,84 @@
         <!-- song control section ends-->
     </div>
     <!-- playlist section ends -->
+    <!-- keyboard section starts -->
+    <div class="container piano-panel hidden">
+        <!-- user name section starts-->
+        <div class="row display-user-name">
+            <div class="col-sm-12 ">
+                <p class="pull-right user-name"></p>
+            </div>
+            <div class="col-sm-12 ">
+                <p class="keyboard-section-header">Virtual Keyboard</p>
+            </div>
+        </div>
+        <!-- user name section ends-->
+        <!-- keyboard keys starts-->
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="table-responsive col-md-10">          
+              <table class="table keyboard-keys">
+                <tbody>
+                  <tr>
+                    <td><button id="2"></button></td>
+                    <td><button id="3"></button></td>
+                    <td><button id="5"></button></td>
+                    <td><button id="6"></button></td>
+                    <td><button id="7"></button></td>
+                    <td><button id="9"></button></td>
+                    <td><button id="0"></button></td>
+                    <td><button id="Equal"></button></td>
+                    <td><button id="Coma"></button></td>
+                  </tr>
+                  <tr>
+                    <td><button id="A"></button></td>
+                    <td><button id="S"></button></td>
+                    <td><button id="F"></button></td>
+                    <td><button id="G"></button></td>
+                    <td><button id="J"></button></td>
+                    <td><button id="K"></button></td>
+                    <td><button id="L"></button></td>
+                    <td><button id="LBracket"></button></td>
+                    <td><button id="RBracket"></button></td>
+                  </tr>
+                  <tr>
+                    <td><button id="Q"></button></td>
+                    <td><button id="W"></button></td>
+                    <td><button id="E"></button></td>
+                    <td><button id="R"></button></td>
+                    <td><button id="T"></button></td>
+                    <td><button id="Y"></button></td>
+                    <td><button id="U"></button></td>
+                    <td><button id="I"></button></td>
+                    <td><button id="O"></button></td>
+                  </tr>    
+                  <tr>
+                    <td><button id="P"></button></td>
+                    <td><button id="Z"></button></td>
+                    <td><button id="X"></button></td>
+                    <td><button id="C"></button></td>
+                    <td><button id="V"></button></td>
+                    <td><button id="B"></button></td>
+                    <td><button id="N"></button></td>
+                    <td><button id="M"></button></td>
+                    <td><button id="Dot"></button></td>
+                  </tr>    
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <!-- keyboard keys ends-->
+    </div>
+    <!-- keyboard section ends -->
     <!-- jquery file -->
     <script src="assets/jquery/jquery-3.2.1.min.js"></script>
     <!-- bootstrap js -->
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <!-- datatable plugin js-->
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <!-- keyboard sound js -->
+    <script src="audiosynth-master/audiosynth.js"></script>
     <!-- custom js file -->
     <script src="assets/custom/js/custom.js"></script>
 </body>
