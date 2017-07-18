@@ -65,13 +65,13 @@ button{
     padding: 1rem;
     color: #FFF;
 }
-#virtual-keyboard-btn{
+#virtual-keyboard-btn,#return-playlist-btn{
     background-color: ;
     color:deeppink;
     font-weight: bolder;
     border-radius: 10px;
 }
-#virtual-keyboard-btn:hover{
+#virtual-keyboard-btn:hover,#return-playlist-btn:hover{
     background-color: deepskyblue;
 }
 /*content*/
@@ -202,6 +202,9 @@ div.col-md-12.current-song-artist,
     height: 80px;
 }
 .keyboard-keys button:hover{
+    background-color: yellow;
+}
+.pressed-key{
     background-color: yellow;
 }
 .keyboard-section-header{

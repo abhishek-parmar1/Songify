@@ -61,6 +61,11 @@ songObjectArray = [
 // max key sound value
 maxKeySoundValue = 4; 
 
+asciiArray = [50,51,53,54,55,57,48,61,44,
+              65,83,70,71,74,75,76,91,93,
+              81,87,69,82,84,89,85,73,79,
+              80,90,88,67,86,66,78,77,46]
+
 // keyboard keys object array
 keyboardKeys = [
     {
@@ -293,7 +298,7 @@ $('body').on('keypress',function(event){
             toggleSong()
         }
     //on every key press call this function
-    pianoPlay(event);
+    keyboardPlay(event);
 });
 
 // to convert time to proper format
@@ -404,6 +409,7 @@ window.onload = function(){
         {
             var keySectionObj = $('.keyboard-keys');
             keySectionObj.find('#' + keyboardKeys[i].keyValue).html(keyboardKeys[i].keyValue + "<br>" + keyboardKeys[i].keySound + keyboardKeys[i].keySoundValue);
+            eventListenerForKeyboardKeys(keyboardKeys[i]);
         }
 }
 
@@ -414,23 +420,44 @@ $('#player').on('timeupdate', function() {
 
 // to change the location on clicking button of virtual keyboard
 $('#virtual-keyboard-btn').on('click',function(){
-   $('.piano-panel .user-name').text($('.main .user-name').text());   //display user name 
+   $('.keyboard-panel .user-name').text($('.main .user-name').text());   //display user name 
    $('.main').addClass('hidden');
-   $('.piano-panel').removeClass('hidden');
+   $('.keyboard-panel').removeClass('hidden');
 });
 
-function pianoPlay(event){
-    if($('.piano-panel').hasClass('hidden')){
-        
+// to change the location on clicking button of playlist mode
+$('#return-playlist-btn').on('click',function(){ 
+   $('.main').removeClass('hidden');
+   $('.keyboard-panel').addClass('hidden');
+});
+
+// function to play the sound of the assined note to the key
+function keyboardPlay(event){
+    if($('.keyboard-panel').hasClass('hidden')){    // search for class to play the sound or not
+        //do nothingin here
     }
     else{
-        var piano = Synth.createInstrument('piano');
-        console.log(event.keyCode);
-       if(event.keyCode == 65)
-           {
-               piano.play('G', 4, 2);
-           }
+        var keyboard = Synth.createInstrument('piano');
+        var keyObj = getKeyObject(event.keyCode);          // pass the event to get the object of the key pressed
+        $('.keyboard-keys button').removeClass('pressed-key');
+        $('#' + keyObj.keyValue).addClass('pressed-key');
+        keyboard.play(keyObj.keySound,keyObj.keySoundValue, 2); //play the sound according to the object 
     }
+}
+
+// function to get the object of the pressed key
+function getKeyObject(asciiCode){
+    var positionInAsciiArray = asciiArray.indexOf(asciiCode);//check the keycode of pressed key in the ascii array 
+    return keyboardKeys[positionInAsciiArray]; // take the position and return the object of the pressed key
+}
+
+function eventListenerForKeyboardKeys(keyObj){
+    $('#' + keyObj.keyValue).on('click',function(){
+        $('.keyboard-keys button').removeClass('pressed-key');
+        $(this).addClass('pressed-key');
+        var keyboard = Synth.createInstrument('piano');
+        keyboard.play(keyObj.keySound,keyObj.keySoundValue, 2);
+    });
 }
 
 ///////////////////////////////////////////////////////////////////// Additional ////////////////////
