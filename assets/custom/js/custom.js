@@ -58,9 +58,7 @@ songObjectArray = [
     }
 ];
 
-// max key sound value
-maxKeySoundValue = 4; 
-
+//  for ascii of keys pressed by user in order according to the  keyboard keys object array
 asciiArray = [50,51,53,54,55,57,48,61,44,
               65,83,70,71,74,75,76,91,93,
               81,87,69,82,84,89,85,73,79,
@@ -275,19 +273,20 @@ function toggleSong()
             arr[0].play();
             $('#play-icon').removeClass('fa-play').addClass('fa-pause');
             $('.content').addClass('add-gif');
-            
+            changeGif();
         }
     else                      // if song is playing
         {
             arr[0].pause();
             $('#play-icon').removeClass('fa-pause').addClass('fa-play');
             $('.content').removeClass('add-gif');
+            $('.content').removeAttr('style');
         }
 }
 
 // play and pause song on click of the button
 $('#play-icon').click(function(){
-    toggleSong()
+    toggleSong();
 });
 
 // work for paying the song on click of spacebar
@@ -295,8 +294,12 @@ $('body').on('keypress',function(event){
     var target = event.target;
     if(event.keyCode == 32  && target.tagName != 'INPUT' )
         {
-            toggleSong()
+            setInterval(function(){
+                updateCurrentTime(); 
+            },1000);
+            toggleSong();
         }
+    
     //on every key press call this function
     keyboardPlay(event);
 });
@@ -337,14 +340,14 @@ function updateCurrentTime(){
 $('#play-icon').on('click',function(){
     setInterval(function(){
         updateCurrentTime(); 
-    }, 1000);
+    },1000);
 });
 
 // call the updateCurrentTime function continuously to update time on click of song name
 $('.song').on('click',function(){
     setInterval(function(){
         updateCurrentTime(); 
-    }, 1000);
+    },1000);
 });
 
 // function which creates the function that handles changing songs on click of song name 
@@ -409,7 +412,7 @@ window.onload = function(){
         {
             var keySectionObj = $('.keyboard-keys');
             keySectionObj.find('#' + keyboardKeys[i].keyValue).html(keyboardKeys[i].keyValue + "<br>" + keyboardKeys[i].keySound + keyboardKeys[i].keySoundValue);
-            eventListenerForKeyboardKeys(keyboardKeys[i]);
+            eventListenerForKeyboardKeys(keyboardKeys[i]);  // create event listener for all key object 
         }
 }
 
@@ -431,14 +434,14 @@ $('#return-playlist-btn').on('click',function(){
    $('.keyboard-panel').addClass('hidden');
 });
 
-// function to play the sound of the assined note to the key
+// function to play the sound of the assined note to the key on a key press from keyboard
 function keyboardPlay(event){
     if($('.keyboard-panel').hasClass('hidden')){    // search for class to play the sound or not
         //do nothingin here
     }
     else{
         var keyboard = Synth.createInstrument('piano');
-        var keyObj = getKeyObject(event.keyCode);          // pass the event to get the object of the key pressed
+        var keyObj = getKeyObject(event.keyCode);  // pass the event to get the object of the key pressed
         $('.keyboard-keys button').removeClass('pressed-key');
         $('#' + keyObj.keyValue).addClass('pressed-key');
         keyboard.play(keyObj.keySound,keyObj.keySoundValue, 2); //play the sound according to the object 
@@ -451,6 +454,7 @@ function getKeyObject(asciiCode){
     return keyboardKeys[positionInAsciiArray]; // take the position and return the object of the pressed key
 }
 
+// function to play the sound of the assined note to the key on the button pressed of any key
 function eventListenerForKeyboardKeys(keyObj){
     $('#' + keyObj.keyValue).on('click',function(){
         $('.keyboard-keys button').removeClass('pressed-key');
@@ -460,9 +464,7 @@ function eventListenerForKeyboardKeys(keyObj){
     });
 }
 
-///////////////////////////////////////////////////////////////////// Additional ////////////////////
-
-// function for repeat song playlist
+// function for repeat song playlist first check that loop flag is on or not and shuffle flag is oon or not
 $('#repeat-play').on('click',function(){
     if(loopFlag == 0 && shuffelFlag !=1 ){
         loopFlag = 1;
@@ -480,7 +482,7 @@ $('#repeat-play').on('click',function(){
     }
 });
 
-// function to play random song from the playlist
+// function to play random song from the playlist first check that loop flag is on or not and shuffle flag is oon or not
 $('#random-play').on('click',function(){
     if(shuffelFlag == 0 && loopFlag!=1 ){
         shuffelFlag = 1;
@@ -505,7 +507,7 @@ function randomExcluded(min, max, excluded) {
     return n;
 }
 
-// perform changes when the song ends
+// perform changes when the song ends for loop all songs or play the random song
 $('.song-play')[0].onended = function(){
     var currentAudioState = $('.song-play')[0];
     if(shuffelFlag == 1){
@@ -544,6 +546,30 @@ $('.song-play')[0].onended = function(){
                }   
     }
 };
+
+//array for selection of random gif in the background
+var gifArr = ['source.gif',
+              'source1.gif',
+              'source2.gif',
+              'source3.gif',
+              'source4.gif',
+              'source5.gif',
+              'source6.gif',
+              'source7.gif',
+              'source9.gif',
+              'source10.gif',
+              'source11.gif',
+              'source12.gif',
+              'source13.gif'
+             ];
+
+// function to select the random gif andchange the gif after 5 seconds
+function changeGif(){
+    setInterval(function(){
+        $('.add-gif').css({'background-image': 'url(C:/Users/ABHISHEK/Desktop/songify/assets/images/' + gifArr[Math.floor(Math.random() * gifArr.length)] + ')'}); 
+    },
+    5000);
+}
 
 /*
 // function to add song

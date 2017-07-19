@@ -19,10 +19,6 @@ body {
     background: black;
     opacity: 0.7;
 }
-.container {
-    height: 100%;
-    width: 100%;
-}
 .welcome-screen {
     height: 100%;
     width: 100%;
@@ -41,7 +37,7 @@ div.welcome-input{
 }
 #name-input,
 button{
-    border-radius: 10%;
+    border-radius: 5px;
 }
 .error{
     border:2px solid red;
@@ -66,10 +62,9 @@ button{
     color: #FFF;
 }
 #virtual-keyboard-btn,#return-playlist-btn{
-    background-color: ;
     color:deeppink;
     font-weight: bolder;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 #virtual-keyboard-btn:hover,#return-playlist-btn:hover{
     background-color: deepskyblue;
@@ -81,8 +76,7 @@ button{
 }
 .add-gif{
     background-image: url(../../images/source.gif);
-    background-size: cover;
-    background-position: bottom;
+    background-size: 100% 150%;
 }
 .table-responsive{
     margin-top: 15px;
@@ -91,7 +85,6 @@ button{
 }
 tr:hover{
     color: black;
-    background-color: aqua;
 }
 tr.song-list-header{
     color: white;
@@ -110,11 +103,10 @@ input[aria-controls="song-playlist"]{
     color: black;
     margin-left: 10px;
 }
-/* song details section */
+/* current song details section */
 .song-details-section{
     height: 260px;
     background-color:#1f1f1f;
-    color: white;
 }
 .current-song-image{
     padding-left: 20px;
@@ -190,6 +182,13 @@ div.col-md-12.current-song-artist,
 }
 /* playlist section styles ends*/
 /* keyboard section styles starts*/
+.container{
+    width: 100%;
+    height: 100%;
+}
+.display-user-name{
+    overflow: hidden;
+}
 .keyboard-keys tr:hover{
             background-color: white;
         }

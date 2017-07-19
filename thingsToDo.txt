@@ -1,3 +1,2 @@
-1> main task
-2> extra objective
 3> add combination of gif
+4> extra objectives
