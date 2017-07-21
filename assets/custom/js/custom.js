@@ -566,10 +566,15 @@ var gifArr = ['source.gif',
 // function to select the random gif andchange the gif after 5 seconds
 function changeGif(){
     setInterval(function(){
-        $('.add-gif').css({'background-image': 'url(C:/Users/ABHISHEK/Desktop/songify/assets/images/' + gifArr[Math.floor(Math.random() * gifArr.length)] + ')'}); 
+        $('.add-gif').css({'background-image': 'url(assets/images/' + gifArr[Math.floor(Math.random() * gifArr.length)] + ')'}); 
     },
-    5000);
+    7000);
 }
+
+//
+$('.volume-slider').on('change',function(){
+   $('.song-play')[0].volume = $(this).val(); 
+});
 
 /*
 // function to add song

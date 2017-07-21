@@ -180,6 +180,10 @@ div.col-md-12.current-song-artist,
 .disabled{
     color: grey;
 }
+.volume-slider{
+    margin-left: 20px;
+    width: 100px !important;
+}
 /* playlist section styles ends*/
 /* keyboard section styles starts*/
 .container{

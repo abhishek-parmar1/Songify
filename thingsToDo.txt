@@ -1,7 +1,5 @@
 1> Add functionality to go to last and next song
 2> Add a icon to mute and unmute the currently playing song
-3> Add a functionality to change the volume of the app using a slider
+3> when volume increases on up key and down key.
 4> Find a way to add a local song file to our app an play it
 5> Find a way to store the information of the song currently playing, and start at that point when we re-open the app (Hint: use localStorage)
-6> Add a login form instead of the welcome screen. (Hint: put everything inside the form tag)
-7> Let the user access the app only when their email is 'test@acadview.com' and their password is 'JavascriptRocks'. Otherwise show a textual error. Make sure to mention this in the placeholder
