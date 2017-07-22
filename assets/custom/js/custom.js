@@ -251,7 +251,7 @@ keyboardKeys = [
 // function to direct the user from the home screen section to the song playlist section
 $('.welcome-screen button').on('click', function() {
     var name = $('#name-input').val();             //take input value
-    var nameReg = /^\w+\s*$/;                      // regexp for name
+    var nameReg = /^\w+\s*$/;                      // regexp for name to check continuous spaces
     if(name.length > 3 && nameReg.test(name))      // check name
         {
             var message = "Welcome, " + name;   
@@ -267,19 +267,19 @@ $('.welcome-screen button').on('click', function() {
 // function to perform operation when song is playing or paused
 function toggleSong()
 {
-    arr = $('.song-play');    // get array of audio tags with class .song-play
+    arr = $('.song-play');    // get array of audio tags with class song-play
     if(arr[0].paused)         // if song paused
         {
-            arr[0].play();
-            $('#play-icon').removeClass('fa-play').addClass('fa-pause');
-            $('.content').addClass('add-gif');
-            changeGif();
+            arr[0].play();    //play the song
+            $('#play-icon').removeClass('fa-play').addClass('fa-pause'); // change icon
+            $('.content').addClass('add-gif');  // add gif effect
+            changeGif();                        //changes the gifs in background
         }
     else                      // if song is playing
         {
-            arr[0].pause();
-            $('#play-icon').removeClass('fa-pause').addClass('fa-play');
-            $('.content').removeClass('add-gif');
+            arr[0].pause();  // pause song
+            $('#play-icon').removeClass('fa-pause').addClass('fa-play'); //change icon
+            $('.content').removeClass('add-gif');  // remove gif effect
             $('.content').removeAttr('style');
         }
 }
@@ -300,7 +300,7 @@ $('body').on('keypress',function(event){
             toggleSong();
         }
     
-    //on every key press call this function
+    //on every key press call this function for piano noted effect
     keyboardPlay(event);
 });
 
@@ -332,8 +332,8 @@ function updateCurrentTime(){
     time1 = fancyTimeFormat(time1);
     time2 = ~~(arr[0].currentTime);   // get song current time 
     time2 = fancyTimeFormat(time2);
-    $('.time-elapsed').text(time2);
-    $('.song-duration').text(time1);
+    $('.time-elapsed').text(time2);   // set current time 
+    $('.song-duration').text(time1);  // set song duration
 }
 
 // call the updateCurrentTime function continuously to update time on click of play btn
@@ -357,17 +357,17 @@ function addSongSrcEventListener(currentSongObj,position)
     $(songID).on('click',function(){                
         var currentSong = $('.song-play');                
         var currentSongSrc = currentSong[0].src;         //current song source
-        if(currentSongSrc.search(currentSongObj.songSrc) != -1)         // check with the provided source
+        if(currentSongSrc.search(currentSongObj.songSrc) != -1) // check with the provided source
             {
-                toggleSong();
+                toggleSong();                         // pause or play the song
             }
         else
         {
-            currentSong[0].src = "songs/" + currentSongObj.songSrc;
-            changeCurrentSongDetails(currentSongObj)
-            $(".song").removeClass("active");           
-            $(this).addClass("active");
-            toggleSong();
+            currentSong[0].src = "songs/" + currentSongObj.songSrc;  // add source to audio tag
+            changeCurrentSongDetails(currentSongObj)  // change current song details
+            $(".song").removeClass("active");         // remove active class from all songs  
+            $(this).addClass("active");               // add active class to current song
+            toggleSong();                             // play or pause the song
         }
     });
 }
@@ -401,7 +401,7 @@ window.onload = function(){
          paging:false
      });
     
-    // for the first song details
+    // for the first song details on load of the html
     changeCurrentSongDetails(songObjectArray[0]);
     
     // set progress bar time fir first load to 0:0
@@ -442,13 +442,13 @@ function keyboardPlay(event){
     else{
         var keyboard = Synth.createInstrument('piano');
         var keyObj = getKeyObject(event.keyCode);  // pass the event to get the object of the key pressed
-        $('.keyboard-keys button').removeClass('pressed-key');
+        $('.keyboard-keys button').removeClass('pressed-key'); // remove class from all keys
         $('#' + keyObj.keyValue).addClass('pressed-key');
-        keyboard.play(keyObj.keySound,keyObj.keySoundValue, 2); //play the sound according to the object 
+        keyboard.play(keyObj.keySound,keyObj.keySoundValue, 2); //play the sound according to the object for 2 seconds
     }
 }
 
-// function to get the object of the pressed key
+// function to return the object of the pressed key
 function getKeyObject(asciiCode){
     var positionInAsciiArray = asciiArray.indexOf(asciiCode);//check the keycode of pressed key in the ascii array 
     return keyboardKeys[positionInAsciiArray]; // take the position and return the object of the pressed key
@@ -464,9 +464,9 @@ function eventListenerForKeyboardKeys(keyObj){
     });
 }
 
-// function for repeat song playlist first check that loop flag is on or not and shuffle flag is oon or not
+// function for repeat song playlist first check that loop flag is on or not and shuffle flag is on or not
 $('#repeat-play').on('click',function(){
-    if(loopFlag == 0 && shuffelFlag !=1 ){
+    if(loopFlag == 0 && shuffelFlag == 0 ){
         loopFlag = 1;
         $(this).removeClass("disabled");
     }
@@ -482,9 +482,9 @@ $('#repeat-play').on('click',function(){
     }
 });
 
-// function to play random song from the playlist first check that loop flag is on or not and shuffle flag is oon or not
+// function to play random song from the playlist first check that loop flag is on or not and shuffle flag is on or not
 $('#random-play').on('click',function(){
-    if(shuffelFlag == 0 && loopFlag!=1 ){
+    if(shuffelFlag == 0 && loopFlag == 0 ){
         shuffelFlag = 1;
         $(this).removeClass("disabled");
     }
@@ -507,42 +507,43 @@ function randomExcluded(min, max, excluded) {
     return n;
 }
 
-// perform changes when the song ends for loop all songs or play the random song
+// perform changes when the song ends for loop all songs or play the random song or repeat songs
 $('.song-play')[0].onended = function(){
     var currentAudioState = $('.song-play')[0];
     if(shuffelFlag == 1){
-        var nextSongNumber = randomExcluded(1,5,currentSongNumber);
-        var nextSongObj = songObjectArray[nextSongNumber-1];
-        currentAudioState.src =  "songs/" + nextSongObj.songSrc;
-        $(".song").removeClass("active");
-        $("#song" + nextSongNumber).addClass("active");
-        toggleSong();
-        changeCurrentSongDetails(nextSongObj);
+        var nextSongNumber = randomExcluded(1,5,currentSongNumber);// generate random number
+        var nextSongObj = songObjectArray[nextSongNumber-1];  // select song object
+        currentAudioState.src =  "songs/" + nextSongObj.songSrc; // change source of audio
+        $(".song").removeClass("active");   // remove active class from songs 
+        $("#song" + nextSongNumber).addClass("active"); // add active class to next song
+        toggleSong();   //play song
+        changeCurrentSongDetails(nextSongObj);  //change details
         currentSongNumber = nextSongNumber;
     }
     else if(currentSongNumber < songObjectArray.length){
-            nextSongObj = songObjectArray[currentSongNumber];
-            currentAudioState.src =  "songs/" + nextSongObj.songSrc;
-            $(".song").removeClass("active");
-            var position = currentSongNumber +1;
-            $("#song" + position).addClass("active");
-            toggleSong();
-            changeCurrentSongDetails(nextSongObj);
-            currentSongNumber += 1;
+            nextSongObj = songObjectArray[currentSongNumber];  // select song object
+            currentAudioState.src =  "songs/" + nextSongObj.songSrc; // change source
+            $(".song").removeClass("active"); // remove class active
+            var position = currentSongNumber +1; // find position
+            $("#song" + position).addClass("active"); // add class active
+            toggleSong();  //play song
+            changeCurrentSongDetails(nextSongObj); // change details
+            currentSongNumber += 1; // increment number by 1
         }
     else{
             if(loopFlag == 1){
-                    currentSongNumber = 1;
+                    currentSongNumber = 1; // change song number to 1st song
                     var nextSongObj = songObjectArray[0];
-                    currentAudioState.src =  "songs/" + nextSongObj.songSrc;
-                    $(".song").removeClass("active");
-                    $("#song1").addClass("active");
-                    toggleSong();
-                    changeCurrentSongDetails(nextSongObj);
+                    currentAudioState.src =  "songs/" + nextSongObj.songSrc; // set source
+                    $(".song").removeClass("active"); //remove class
+                    $("#song1").addClass("active");// add class
+                    toggleSong(); //play song
+                    changeCurrentSongDetails(nextSongObj);// change details
                }
             else{
-                    $('#play-icon').removeClass('fa-pause').addClass('fa-play');
-                    $('.content').removeClass('add-gif');
+                    $('#play-icon').removeClass('fa-pause').addClass('fa-play');//change icon
+                    $('.content').removeClass('add-gif'); // remove gif effect
+                    $('.content').removeAttr('style');
                }   
     }
 };
@@ -563,7 +564,7 @@ var gifArr = ['source.gif',
               'source13.gif'
              ];
 
-// function to select the random gif andchange the gif after 5 seconds
+// function to select the random gif and change the gif after 5 seconds
 function changeGif(){
     setInterval(function(){
         $('.add-gif').css({'background-image': 'url(assets/images/' + gifArr[Math.floor(Math.random() * gifArr.length)] + ')'}); 
@@ -571,9 +572,45 @@ function changeGif(){
     7000);
 }
 
-//
+//perform volume slider task 
 $('.volume-slider').on('change',function(){
-   $('.song-play')[0].volume = $(this).val(); 
+    $("#play-volume").removeClass("fa-volume-off");
+    var currentSongObj = $('.song-play')[0]; // select audio tag 
+    var currentVolume = currentSongObj.volume; // get audio tag volume
+    var newVolume = $(this).val(); // get new volume to set on audio tag
+    if(currentVolume <= newVolume){  //change icon to up of volume increase 
+        changeVolumeClass("up");
+        currentSongObj.volume = $(this).val();
+        $("#play-volume").addClass("fa-volume-off");
+        }
+    else{                            //change icon to down on volume decrease
+        changeVolumeClass("down");
+        currentSongObj.volume = $(this).val();
+        $("#play-volume").addClass("fa-volume-off");
+    }
+});
+
+//function to change icon of volume
+function changeVolumeClass(classType){
+    $("#play-volume").addClass("fa-volume-" + classType);
+    setTimeout(function(){
+            $("#play-volume").removeClass("fa-volume-" + classType);
+        }, 500);
+}
+
+//function to mute or unmute the song on click of volume icon
+$('#play-volume').on('click',function(){
+    var currentSongObj = $('.song-play')[0];
+    if(currentSongObj.volume != 0){
+           currentSongObj.volume = 0;
+           $('#volume-slider').val(0);
+           $(this).removeClass('disabled');
+       }
+    else{
+        currentSongObj.volume = 1;
+        $('#volume-slider').val(1);
+        $(this).addClass('disabled');
+    }
 });
 
 /*

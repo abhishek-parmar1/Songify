@@ -1,5 +1,4 @@
 1> Add functionality to go to last and next song
-2> Add a icon to mute and unmute the currently playing song
-3> when volume increases on up key and down key.
-4> Find a way to add a local song file to our app an play it
-5> Find a way to store the information of the song currently playing, and start at that point when we re-open the app (Hint: use localStorage)
+2> Find a way to add a local song file to our app an play it
+3>voice functionality
+4> piano tones can change

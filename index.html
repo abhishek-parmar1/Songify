@@ -126,13 +126,14 @@
         <!-- song controls section starts-->
         <div class="row footer" >
             <div class="col-sm-12 controls">
+                <i class="fa  fa-microphone-slash clickable disabled" id="play-microphone" aria-hidden="true"></i>
                 <i class="fa fa-random clickable disabled" id="random-play" aria-hidden="true"></i>
                 <i class="fa fa-step-backward clickable" id="backwrad-play" aria-hidden="true"></i>
                 <i class="fa fa-play clickable " id="play-icon" aria-hidden="true"></i>
                 <i class="fa fa-step-forward clickable" id="forward-play" aria-hidden="true"></i>
                 <i class="fa fa-repeat disabled clickable" id="repeat-play" aria-hidden="true"></i>
-                <i class="fa fa-volume-off disabled clickable" id="repeat-play" aria-hidden="true"></i>
-                <input type="range" min=0 max=1 step=0.01 value='0.30' class="volume-slider">
+                <i class="fa fa-volume-off disabled clickable" id="play-volume" aria-hidden="true"></i>
+                <input type="range" min=0 max=1 step=0.1 value='1' class="volume-slider" id="volume-slider">
             </div>
             <div class="progress-wrapper col-sm-12">
                 <div class="row">

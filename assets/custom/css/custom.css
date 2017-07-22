@@ -157,7 +157,8 @@ div.col-md-12.current-song-artist,
     margin-left: 50px;
 }
 .fa-random,
-.fa-repeat{
+.fa-repeat,
+.fa-volume-off{
     color: limegreen;
 }
 .progress-wrapper {
