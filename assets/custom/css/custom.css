@@ -225,4 +225,8 @@ div.col-md-12.current-song-artist,
     text-align: center;
     margin-top: 30px;
 }
+.fa-plus-square,
+.fa-minus-square{
+    color: black;
+}
 /* keyboard section styles ends*/        

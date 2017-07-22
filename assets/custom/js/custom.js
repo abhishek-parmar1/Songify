@@ -4,6 +4,10 @@ var loopFlag = 0;
 var shuffelFlag = 0;
 // for current playing song number
 var currentSongNumber = 1;
+//min key sound value for keyboard
+var minKeySoundValue = 2;
+//max key sound value for keyboard
+var maxKeySoundValue = 4;
 
 // details of songs in array
 /*
@@ -69,182 +73,182 @@ keyboardKeys = [
     {
         'keyValue' : '2',
         'keySound' : 'C',
-        'keySoundValue' : '2'
+        'keySoundValue' : 2
     },
     {
         'keyValue' : '3',
         'keySound' : 'D',
-        'keySoundValue' : '2'
+        'keySoundValue' : 2
     },
     {
         'keyValue' : '5',
         'keySound' : 'F',
-        'keySoundValue' : '2'
+        'keySoundValue' : 2
     },
     {
         'keyValue' : '6',
         'keySound' : 'G',
-        'keySoundValue' : '2'
+        'keySoundValue' : 2
     },
     {
         'keyValue' : '7',
         'keySound' : 'A',
-        'keySoundValue' : '2'
+        'keySoundValue' : 2
     },
     {
         'keyValue' : '9',
         'keySound' : 'C',
-        'keySoundValue' : '3'
+        'keySoundValue' : 3
     },
     {
         'keyValue' : '0',
         'keySound' : 'D',
-        'keySoundValue' : '3'
+        'keySoundValue' : 3
     },
     {
         'keyValue' : 'Equal',
         'keySound' : 'F',
-        'keySoundValue' : '3'
+        'keySoundValue' : 3
     },
     {
         'keyValue' : 'Coma',
         'keySound' : 'A',
-        'keySoundValue' : '4'
+        'keySoundValue' : 4
     },
     {
         'keyValue' : 'A',
         'keySound' : 'G',
-        'keySoundValue' : '3'
+        'keySoundValue' : 3
     },
     {
         'keyValue' : 'S',
         'keySound' : 'A',
-        'keySoundValue' : '3'
+        'keySoundValue' : 3
     },
     {
         'keyValue' : 'F',
         'keySound' : 'C',
-        'keySoundValue' : '4'
+        'keySoundValue' : 4
     },
     {
         'keyValue' : 'G',
         'keySound' : 'D',
-        'keySoundValue' : '4'
+        'keySoundValue' : 4
     },
     {
         'keyValue' : 'J',
         'keySound' : 'F',
-        'keySoundValue' : '4'
+        'keySoundValue' : 4
     },
     {
         'keyValue' : 'K',
         'keySound' : 'G',
-        'keySoundValue' : '4'
+        'keySoundValue' : 4
     },
     {
         'keyValue' : 'L',
         'keySound' : 'A',
-        'keySoundValue' : '4'
+        'keySoundValue' : 4
     },
     {
         'keyValue' : 'LBracket',
         'keySound' : 'F',
-        'keySoundValue' : '3'
+        'keySoundValue' : 3
     },
     {
         'keyValue' : 'RBracket',
         'keySound' : 'G',
-        'keySoundValue' : '3'
+        'keySoundValue' : 3
     },
     {
         'keyValue' : 'Q',
         'keySound' : 'C',
-        'keySoundValue' : '2'
+        'keySoundValue' : 2
     },
     {
         'keyValue' : 'W',
         'keySound' : 'D',
-        'keySoundValue' : '2'
+        'keySoundValue' : 2
     },
     {
         'keyValue' : 'E',
         'keySound' : 'E',
-        'keySoundValue' : '2'
+        'keySoundValue' : 2
     },
     {
         'keyValue' : 'R',
         'keySound' : 'F',
-        'keySoundValue' : '2'
+        'keySoundValue' : 2
     },
     {
         'keyValue' : 'T',
         'keySound' : 'G',
-        'keySoundValue' : '2'
+        'keySoundValue' : 2
     },
     {
         'keyValue' : 'Y',
         'keySound' : 'A',
-        'keySoundValue' : '2'
+        'keySoundValue' : 2
     },
     {
         'keyValue' : 'U',
         'keySound' : 'B',
-        'keySoundValue' : '2'
+        'keySoundValue' : 2
     },
     {
         'keyValue' : 'I',
         'keySound' : 'C',
-        'keySoundValue' : '3'
+        'keySoundValue' : 3
     },
     {
         'keyValue' : 'O',
         'keySound' : 'D',
-        'keySoundValue' : '3'
+        'keySoundValue' : 3
     },
     {
         'keyValue' : 'P',
         'keySound' : 'E',
-        'keySoundValue' : '3'
+        'keySoundValue' : 3
     },
     {
         'keyValue' : 'Z',
         'keySound' : 'A',
-        'keySoundValue' : '3'
+        'keySoundValue' : 3
     },
     {
         'keyValue' : 'X',
         'keySound' : 'B',
-        'keySoundValue' : '3'
+        'keySoundValue' : 3
     },
     {
         'keyValue' : 'C',
         'keySound' : 'C',
-        'keySoundValue' : '4'
+        'keySoundValue' : 4
     },
     {
         'keyValue' : 'V',
         'keySound' : 'D',
-        'keySoundValue' : '4'
+        'keySoundValue' : 4
     },
     {
         'keyValue' : 'B',
         'keySound' : 'E',
-        'keySoundValue' : '4'
+        'keySoundValue' : 4
     },
     {
         'keyValue' : 'N',
         'keySound' : 'F',
-        'keySoundValue' : '4'
+        'keySoundValue' : 4
     },
     {
         'keyValue' : 'M',
         'keySound' : 'G',
-        'keySoundValue' : '4'
+        'keySoundValue' : 4
     },
     {
         'keyValue' : 'Dot',
         'keySound' : 'B',
-        'keySoundValue' : '4'
+        'keySoundValue' : 4
     }
 ]
 
@@ -407,6 +411,12 @@ window.onload = function(){
     // set progress bar time fir first load to 0:0
     updateCurrentTime();
     
+    // display key board button values
+    displayKeyBoardButtonsValues();
+}
+
+// function to display key board button values
+function displayKeyBoardButtonsValues(){
     // initialize the keyboard values with the keys
     for(var i=0;i<keyboardKeys.length;i++)
         {
@@ -415,6 +425,7 @@ window.onload = function(){
             eventListenerForKeyboardKeys(keyboardKeys[i]);  // create event listener for all key object 
         }
 }
+
 
 //for the progress bar of the song
 $('#player').on('timeupdate', function() {
@@ -612,6 +623,41 @@ $('#play-volume').on('click',function(){
         $(this).addClass('disabled');
     }
 });
+
+// function to add 1 to key sound value of all objects
+function changeKeyBoardNoteValuePlus(){
+    if(keyboardKeys[0].keySoundValue < maxKeySoundValue)
+        {
+            for(var i=0; i<keyboardKeys.length; i++)
+                {
+                    keyboardKeys[i].keySoundValue += 1;
+                }
+        }
+}
+
+// function to minus 1 to key sound value of all objects
+function changeKeyBoardNoteValueMinus(){
+    if(keyboardKeys[0].keySoundValue > minKeySoundValue)
+        {
+            for(var i=0; i<keyboardKeys.length; i++)
+                {
+                    keyboardKeys[i].keySoundValue -= 1;
+                }
+        }
+}
+
+// function to change the key sound value of all objects by +1 and display them
+$('.plus-key-notes').on('click',function(){
+    changeKeyBoardNoteValuePlus();
+    displayKeyBoardButtonsValues();
+});
+
+// function to change the key sound value of all objects by -1 and display them
+$('.minus-key-notes').on('click',function(){
+    changeKeyBoardNoteValueMinus();
+    displayKeyBoardButtonsValues();
+});
+
 
 /*
 // function to add song
