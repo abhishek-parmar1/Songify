@@ -372,6 +372,7 @@ function addSongSrcEventListener(currentSongObj,position)
             $(".song").removeClass("active");         // remove active class from all songs  
             $(this).addClass("active");               // add active class to current song
             toggleSong();                             // play or pause the song
+            currentSongNumber=position;
         }
     });
 }
@@ -514,7 +515,8 @@ $('#random-play').on('click',function(){
 // function for a random number for song selection
 function randomExcluded(min, max, excluded) {
     var n = Math.floor(Math.random() * (max-min) + min);
-    if (n >= excluded) n++;
+    if (n >= excluded) 
+        n++;
     return n;
 }
 
@@ -522,7 +524,7 @@ function randomExcluded(min, max, excluded) {
 $('.song-play')[0].onended = function(){
     var currentAudioState = $('.song-play')[0];
     if(shuffelFlag == 1){
-        var nextSongNumber = randomExcluded(1,5,currentSongNumber);// generate random number
+        var nextSongNumber = randomExcluded(1,songObjectArray.length,currentSongNumber);// generate random number
         var nextSongObj = songObjectArray[nextSongNumber-1];  // select song object
         currentAudioState.src =  "songs/" + nextSongObj.songSrc; // change source of audio
         $(".song").removeClass("active");   // remove active class from songs 
@@ -558,6 +560,39 @@ $('.song-play')[0].onended = function(){
                }   
     }
 };
+
+// forward the song
+$('#forward-play').on('click',function(){
+   var currentAudioState = $('.song-play')[0];
+   currentAudioState.currentTime = currentAudioState.duration;
+});
+
+// backward the song
+$('#backward-play').on('click',function(){
+    var currentAudioState = $('.song-play')[0];
+   if(currentSongNumber == 1)
+       {
+           var nextSongObj = songObjectArray[songObjectArray.length-1];
+           currentAudioState.src =  "songs/" + nextSongObj.songSrc;
+           $(".song").removeClass("active");   // remove active class from songs
+           nextSongNumber = songObjectArray.length;
+           $("#song" + nextSongNumber).addClass("active"); // add active class to next song
+           toggleSong();   //play song
+           changeCurrentSongDetails(nextSongObj);  //change details
+           currentSongNumber = nextSongNumber;
+       }
+    else
+        {
+            var nextSongObj = songObjectArray[currentSongNumber-2];
+           currentAudioState.src =  "songs/" + nextSongObj.songSrc;
+           $(".song").removeClass("active");   // remove active class from songs
+           nextSongNumber = currentSongNumber-1;
+           $("#song" + nextSongNumber).addClass("active"); // add active class to next song
+           toggleSong();   //play song
+           changeCurrentSongDetails(nextSongObj);  //change details
+           currentSongNumber = nextSongNumber;
+        }
+});
 
 //array for selection of random gif in the background
 var gifArr = ['source.gif',
