@@ -141,10 +141,23 @@ div.col-md-12.current-song-artist,
 }
 
 /*footer*/
+#add-song{
+    color: black;
+}
 .footer {
     height: 80px;
     background-color:#1f1f1f;
     padding-top: 1rem;
+}
+@media(max-width: 992px){
+    .footer{
+        height: 120px;
+        padding-top: 4rem;
+    }
+    .song-details,
+    .current-song-image{
+        border: 2px solid black;
+    }
 }
 .controls {
     display:flex;

@@ -693,11 +693,14 @@ $('.minus-key-notes').on('click',function(){
     displayKeyBoardButtonsValues();
 });
 
-
-/*
 // function to add song
-$('#submit_song').click(function(){
-    var song_name = $('#song_to_upload').val().replace(/C:\\fakepath\\/i, '');
-    $("audio").attr("src","songs/" + song_name);
+$('#add-song').on('click',function(){
+    var add_song_src = $('#add-song-file').val().replace(/C:\\fakepath\\/i, '');
+    console.log(add_song_src);
+    var add_song_artist = $('#add-song-artist').val();
+    if(add_song_artist == "")
+        add_song_artist = "Default Name";
+    console.log(add_song_artist);
+    var add_song_duration = $('#add-song-duration').val();
+    console.log(add_song_duration);
 });
-*/
