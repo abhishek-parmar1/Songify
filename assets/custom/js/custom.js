@@ -8,6 +8,8 @@ var currentSongNumber = 1;
 var minKeySoundValue = 2;
 //max key sound value for keyboard
 var maxKeySoundValue = 4;
+// voice controll tag
+var voiceEnabled = 0;
 
 // details of songs in array
 /*
@@ -692,7 +694,147 @@ $('.minus-key-notes').on('click',function(){
     changeKeyBoardNoteValueMinus();
     displayKeyBoardButtonsValues();
 });
+//////////////////////TESTING CODE /////////////////////////////////////////////////////
+$('#play-microphone').on('click',function(){
+    if(voiceEnabled == 0)
+    {
+        voiceEnabled=1;
+        $(this).removeClass('disabled');
+        $(this).removeClass('fa-microphone-slash');
+        $(this).addClass('fa-microphone');
+        enableVoice();
+    }
+    else
+    {
+        voiceEnabled=0;
+        $(this).addClass('disabled');
+        $(this).removeClass('fa-microphone');
+        $(this).addClass('fa-microphone-slash');
+    }
+});
 
+function speak( text, scope) 
+{
+    var message = new SpeechSynthesisUtterance(text.replace("-", " "));
+    message.rate = 1;
+    window.speechSynthesis.speak(message);
+    if (scope) 
+    {
+      message.onend = function() 
+      {
+        return;
+      }
+    }
+}
+
+function processCommands(cmd) {
+    
+    switch (cmd) {
+      case "play":
+        speak("Playing song", true);    
+        setTimeout(toggleSong, 2000);   
+        break;
+      case 'pause':
+        toggleSong();
+        break;
+      case "stop":
+        toggleSong();
+        break;
+      case "next":
+        speak("Playing next song", true);
+        $('#forward-play').click();   
+        break;
+      case "previous":
+        speak("Playing previous song", true);
+        $('#backward-play').click();    
+        break;
+      default:
+        speak("Your command was invalid!", false);
+    }
+  }
+
+function enableVoice()
+{   
+        
+    // to check browser supports webspeech or not
+      if (window['webkitSpeechRecognition'] ) 
+      {
+          // create a reference 
+          var speechRecognizer = new webkitSpeechRecognition();
+
+          // Recognition will not end when user stops speaking
+          speechRecognizer.continuous = true;
+
+          // Process the request while the user is speaking
+          speechRecognizer.interimResults = true;
+
+          // Account for accent
+          speechRecognizer.lang = "en-US";
+          
+          // avaliable commands array
+          var currentCommands = ['play', 'stop', 'pause', 'next', 'previous'];
+          results = [];
+          timeoutSet = false;
+          
+          //starts the speech recognition service listening to incoming audio
+          speechRecognizer.start();
+          
+          // call the event listener on result of webspeech
+           speechRecognizer.onresult = function (evt) 
+           {
+                  // push the result to the array
+                  results.push(evt.results);
+                  
+                  // set a time out for 3 seconds to retrive the user input for 3 seconds 
+                  if (!timeoutSet) {
+                    
+                      setTimeout(function() {
+                      timeoutSet = false;
+                      
+                      // reverse the array            
+                      results.reverse();
+                          
+                      try {
+                        // iterate over the array  
+                        results.forEach(function (val, i) {
+                          // get the value from the transcript key        
+                          var el = val[0][0].transcript.toLowerCase();
+                          // split the message and search in current commands array
+                          if (currentCommands.indexOf(el.split(" ")[0]) !== -1) {
+                            
+                            // stop the web speech listener  
+                            speechRecognizer.abort();
+                            processCommands(el);
+                            results = [];
+                            throw new BreakLoopException;
+                          }
+                          if (i === 0) {
+                            processCommands(el);
+                            // stop the web speech listener  
+                            speechRecognizer.abort();
+                            results = [];
+                          }
+                        });
+                      }
+                      catch(e) {return e;}
+                    }, 3000)
+                  }
+                  timeoutSet = true;
+           }
+          //starts the speech recognition service listening to incoming audio on end   
+          speechRecognizer.onend = function () 
+          {
+            speechRecognizer.start();
+          }
+      } 
+     else 
+     {
+         alert("Your browser does not support the Web Speech API");
+     }
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////
 // function to add song
 $('#add-song').on('click',function(){
     var add_song_src = $('#add-song-file').val().replace(/C:\\fakepath\\/i, '');
@@ -704,3 +846,5 @@ $('#add-song').on('click',function(){
     var add_song_duration = $('#add-song-duration').val();
     console.log(add_song_duration);
 });
+
+    
