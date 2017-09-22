@@ -694,7 +694,8 @@ $('.minus-key-notes').on('click',function(){
     changeKeyBoardNoteValueMinus();
     displayKeyBoardButtonsValues();
 });
-//////////////////////TESTING CODE /////////////////////////////////////////////////////
+
+// eventlistener for on click microphhone
 $('#play-microphone').on('click',function(){
     if(voiceEnabled == 0)
     {
@@ -702,6 +703,8 @@ $('#play-microphone').on('click',function(){
         $(this).removeClass('disabled');
         $(this).removeClass('fa-microphone-slash');
         $(this).addClass('fa-microphone');
+        $('#voice-commands').removeClass('hidden');
+        $('.current-song-image').removeClass('col-md-offset-3');
         enableVoice();
     }
     else
@@ -710,29 +713,26 @@ $('#play-microphone').on('click',function(){
         $(this).addClass('disabled');
         $(this).removeClass('fa-microphone');
         $(this).addClass('fa-microphone-slash');
+        $('#voice-commands').addClass('hidden');
+        $('.current-song-image').addClass('col-md-offset-3');
     }
 });
 
-function speak( text, scope) 
+// function to speak to the user 
+function speak( text) 
 {
     var message = new SpeechSynthesisUtterance(text.replace("-", " "));
     message.rate = 1;
     window.speechSynthesis.speak(message);
-    if (scope) 
-    {
-      message.onend = function() 
-      {
-        return;
-      }
-    }
 }
 
+// function to proccess the user commands
 function processCommands(cmd) {
     
     switch (cmd) {
       case "play":
-        speak("Playing song", true);    
-        setTimeout(toggleSong, 2000);   
+        speak("Playing song");    
+        setTimeout(toggleSong, 1000);   
         break;
       case 'pause':
         toggleSong();
@@ -741,18 +741,19 @@ function processCommands(cmd) {
         toggleSong();
         break;
       case "next":
-        speak("Playing next song", true);
+        speak("Playing next song");
         $('#forward-play').click();   
         break;
       case "previous":
-        speak("Playing previous song", true);
+        speak("Playing previous song");
         $('#backward-play').click();    
         break;
       default:
-        speak("Your command was invalid!", false);
+        speak("Your command was invalid!");
     }
   }
 
+// function to take input from user as voice
 function enableVoice()
 {   
         
@@ -763,7 +764,7 @@ function enableVoice()
           var speechRecognizer = new webkitSpeechRecognition();
 
           // Recognition will not end when user stops speaking
-          speechRecognizer.continuous = true;
+          speechRecognizer.continuous = false;
 
           // Process the request while the user is speaking
           speechRecognizer.interimResults = true;
@@ -824,7 +825,8 @@ function enableVoice()
           //starts the speech recognition service listening to incoming audio on end   
           speechRecognizer.onend = function () 
           {
-            speechRecognizer.start();
+            speechRecognizer.abort();
+            $('#play-microphone').click();  
           }
       } 
      else 
@@ -833,8 +835,6 @@ function enableVoice()
      }
 }
 
-
-////////////////////////////////////////////////////////////////////////////////////////
 // function to add song
 $('#add-song').on('click',function(){
     var add_song_src = $('#add-song-file').val().replace(/C:\\fakepath\\/i, '');

@@ -115,6 +115,15 @@
         <!-- song playlist section ends-->
         <!-- current song details section starts -->
         <div class="row song-details-section">
+            <div class="col-md-3 hidden" id="voice-commands" >
+                <ul>
+                    <li>PLAY</li>
+                    <li>STOP</li>
+                    <li>NEXT</li>
+                    <li>PREVIOUS</li>
+                    <li>PAUSE</li>
+                </ul>
+            </div>
             <div class="col-md-2 col-md-offset-3 current-song-image">
                 <img src="" id="current-song-image" width="200px" height="141px">
             </div>
@@ -256,50 +265,3 @@
     <script src="assets/custom/js/custom.js"></script>
 </body>
 </html>
-
-
-
-
-
-<!--
-  // Speech API
-  speak: function(text, scope) {
-    var message = new SpeechSynthesisUtterance(text.replace("-", " "));
-    message.rate = 1;
-    window.speechSynthesis.speak(message);
-    if (scope) {
-      message.onend = function() {
-        scope.play();
-      }
-    }
-  },
-  processCommands: function(cmd) {
-    this.changeLastCommand(cmd);
-    var playSpecific = cmd.match(/play\s*(.+)$/);
-    if (playSpecific) {
-      this.searchSpecificSong(playSpecific[1]);
-      return;
-    }
-    switch (cmd) {
-      case "play":
-        this.play();
-        break;
-      case 'pause':
-        this.stop();
-        break;
-      case "stop":
-        this.stop(true);
-        break;
-      case "next":
-        this.next();
-        break;
-      case "previous":
-        this.prev();
-        break;
-      default:
-        this.speak("Your command was invalid!", false);
-    }
-  },
-}
-
--->

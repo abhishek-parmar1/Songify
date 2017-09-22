@@ -104,6 +104,15 @@ input[aria-controls="song-playlist"]{
     margin-left: 10px;
 }
 /* current song details section */
+#voice-commands li{
+    list-style: none;
+    font-weight: bolder;
+    color: white;
+    position: relative;
+    border: 1px solid white;
+    top:20px;
+    text-align: center;
+}
 .song-details-section{
     height: 260px;
     background-color:#1f1f1f;
