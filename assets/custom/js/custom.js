@@ -387,9 +387,9 @@ function changeCurrentSongDetails(currentSongObj){
     detailsSectionRef.find(".current-song-artist").text(currentSongObj.songArtist);
 }
 
-//load all the songs details in the html
-window.onload = function(){
-    
+// dynamic load songs
+function loadSongObjectArray()
+{    
     // create the playlist section of songs
     for(var i=1;i<=songObjectArray.length;i++)
         {
@@ -402,6 +402,12 @@ window.onload = function(){
             songSectionRef.find('.duration').text(songObj.songDuration);
             addSongSrcEventListener(songObj,i);          
         }
+}
+
+//load all the songs details in the html
+window.onload = function(){
+    
+    loadSongObjectArray();
     
     // for searching and sorting in the songs and creating its table
     $('#song-playlist').DataTable({
@@ -837,14 +843,31 @@ function enableVoice()
 
 // function to add song
 $('#add-song').on('click',function(){
-    var add_song_src = $('#add-song-file').val().replace(/C:\\fakepath\\/i, '');
-    console.log(add_song_src);
+    
+    var add_song_name = $('#add-song-name').val();
+    //$('#add-song-name').val() = "";
+    if(add_song_name == "")
+        add_song_name = "Default Song Name";
+    
     var add_song_artist = $('#add-song-artist').val();
+    //$('#add-song-artist').val() = "";
     if(add_song_artist == "")
-        add_song_artist = "Default Name";
-    console.log(add_song_artist);
+        add_song_artist = "Default Artist Name";
+    
     var add_song_duration = $('#add-song-duration').val();
-    console.log(add_song_duration);
+    //$('#add-song-duration').val() = "";
+    $('#song-playlist tbody').append('<tr class="song" id="song' + (songObjectArray.length+1) + '"><td class="name"></td><td class="artist"></td><td class="album"></td><td class="duration"></td></tr>');
+    
+    songObjectArray.push({
+        'songName' : add_song_name,
+        'songArtist' : add_song_artist,
+        'songAlbum' : 'Album#' + (songObjectArray.length+1),
+        'songDuration' : add_song_duration,
+        'songSrc' : 'song' + (songObjectArray.length+1) + '.mp3',
+        'imagePath' : 'default.jpg'
+    });
+    
+    loadSongObjectArray();
 });
 
     
