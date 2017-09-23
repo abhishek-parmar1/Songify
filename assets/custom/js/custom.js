@@ -841,23 +841,27 @@ function enableVoice()
      }
 }
 
-// function to add song
+// function to add song to the playlist
 $('#add-song').on('click',function(){
     
+    // get the value from the tags
     var add_song_name = $('#add-song-name').val();
-    //$('#add-song-name').val() = "";
+    $('#add-song-name').val("");
     if(add_song_name == "")
         add_song_name = "Default Song Name";
     
     var add_song_artist = $('#add-song-artist').val();
-    //$('#add-song-artist').val() = "";
+    $('#add-song-artist').val("");
     if(add_song_artist == "")
         add_song_artist = "Default Artist Name";
     
     var add_song_duration = $('#add-song-duration').val();
-    //$('#add-song-duration').val() = "";
+    $('#add-song-duration').val("");
+    
+    // create a new section for the new song
     $('#song-playlist tbody').append('<tr class="song" id="song' + (songObjectArray.length+1) + '"><td class="name"></td><td class="artist"></td><td class="album"></td><td class="duration"></td></tr>');
     
+    // store the song details in the array of objects of song
     songObjectArray.push({
         'songName' : add_song_name,
         'songArtist' : add_song_artist,
@@ -867,6 +871,7 @@ $('#add-song').on('click',function(){
         'imagePath' : 'default.jpg'
     });
     
+    // call the function to load the html with new song
     loadSongObjectArray();
 });
 
