@@ -1,3 +1,0 @@
-1> 
-2> Find a way to add a local song file to our app an play it
-3>
